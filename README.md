@@ -11,7 +11,7 @@ Repository of Grizzly Bears (Bottiglieri Gianluca, Castellotti Roberto, Siri Edo
 
 ## Technologies we plan to use
 
-We plan to start with good old plain html, css and javascript and potentially we will extend, if needed, using either [https://preactjs.com/](https://preactjs.com/) (micro react framework with API compatibility) or [https://svelte.dev/](https://svelte.dev/)[1], eventually we might add 
+We plan to start with good old plain html, css and javascript and potentially we will extend, if needed, using either [https://preactjs.com/](https://preactjs.com/) (micro react framework with API compatibility) or [https://svelte.dev/](https://svelte.dev/), eventually we might add 
 [https://tailwindcss.com/](https://tailwindcss.com/) if we notice our css becomes too complex to manage.
 
 

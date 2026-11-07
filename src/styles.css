@@ -1,0 +1,289 @@
+@import "tailwindcss" source(none);
+
+/* Only scan app sources. Without this, Tailwind walks every non-ignored file in
+   the repo root (e.g. .direnv/flake-inputs symlinks into /nix/store), which
+   adds ~3.5s to the build and generates bogus utilities. */
+@source "./**/*.{js,jsx}";
+
+@theme {
+  --font-hand: "Caveat", "Segoe Print", cursive;
+  --font-note: "Patrick Hand", "Comic Sans MS", cursive;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  --color-paper: #faf7ed;
+  --color-card: #fffdf7;
+  --color-desk: #d8d1c4;
+  --color-ink: #2f352f;
+  --color-ink-soft: #4f554b;
+  --color-ink-faint: #7a7f73;
+}
+
+@layer base {
+  :root {
+    --accent: #b9563d;
+  }
+
+  body {
+    min-width: 300px;
+    margin: 0;
+    color: var(--color-ink);
+    background-color: var(--color-desk);
+    background-image:
+      radial-gradient(
+        circle at 16% 10%,
+        rgba(255, 252, 244, 0.35),
+        transparent 34%
+      ),
+      linear-gradient(118deg, #dcd5c8 0%, #d2cabc 52%, #d8d1c4 100%);
+    font-family: var(--font-note);
+    font-size: 20px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(235, 205, 125, 0.52);
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+@layer components {
+  .desk-pad {
+    padding: 34px 22px 52px;
+  }
+
+  .notebook {
+    --page-left: 108px;
+    --page-right: 64px;
+    --margin-x: 68px;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100svh - 86px);
+    background-color: var(--color-paper);
+    background-image:
+      linear-gradient(
+        90deg,
+        transparent 0,
+        transparent calc(var(--margin-x) - 1px),
+        rgba(184, 84, 70, 0.22) calc(var(--margin-x) - 1px),
+        rgba(184, 84, 70, 0.22) var(--margin-x),
+        transparent var(--margin-x)
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0,
+        transparent 23px,
+        rgba(88, 124, 158, 0.11) 23px,
+        rgba(88, 124, 158, 0.11) 24px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 23px,
+        rgba(88, 124, 158, 0.11) 23px,
+        rgba(88, 124, 158, 0.11) 24px
+      );
+    border: 1px solid rgba(58, 52, 40, 0.18);
+    border-radius: 2px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.58) inset,
+      0 18px 46px rgba(58, 49, 36, 0.15),
+      0 2px 5px rgba(58, 49, 36, 0.08);
+  }
+
+  .page-pad {
+    padding-left: var(--page-left);
+    padding-right: var(--page-right);
+  }
+
+  /* A highlighter swatch behind a phrase: two slightly skewed marker strokes
+     with uneven corners, so the edges never look machine-straight. */
+  .notebook-marker {
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+    padding: 0 0.03em;
+    white-space: nowrap;
+  }
+
+  .notebook-marker::before,
+  .notebook-marker::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .notebook-marker::before {
+    inset: 0.14em -0.05em 0.06em -0.03em;
+    transform: rotate(-0.9deg);
+    border-radius: 0.35em 0.18em 0.4em 0.22em / 0.5em 0.28em 0.42em 0.55em;
+    background:
+      linear-gradient(
+        97deg,
+        rgba(243, 208, 104, 0.16) 0%,
+        rgba(238, 193, 60, 0.52) 7%,
+        rgba(236, 187, 48, 0.46) 93%,
+        rgba(243, 208, 104, 0.14) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(238, 193, 60, 0.08),
+        rgba(236, 187, 48, 0.34) 24%,
+        rgba(234, 181, 42, 0.42) 76%,
+        rgba(240, 201, 90, 0.12)
+      );
+  }
+
+  /* A lighter second pass, as if the pen went over the line twice. */
+  .notebook-marker::after {
+    inset: 0.26em -0.09em 0.16em 0.05em;
+    transform: rotate(0.7deg);
+    border-radius: 0.4em 0.14em 0.3em 0.48em / 0.28em 0.48em 0.24em 0.42em;
+    background: rgba(244, 206, 96, 0.32);
+  }
+
+  /* The colophon sits on a clean strip of paper: the squared grid stops at the
+     footer rule, while the red margin line keeps running to the page edge. */
+  .notebook-footer {
+    background-color: var(--color-paper);
+    background-image: linear-gradient(
+      90deg,
+      transparent 0,
+      transparent calc(var(--margin-x) - 1px),
+      rgba(184, 84, 70, 0.22) calc(var(--margin-x) - 1px),
+      rgba(184, 84, 70, 0.22) var(--margin-x),
+      transparent var(--margin-x)
+    );
+  }
+
+  .chart-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .chart-svg text {
+    font-family: var(--font-note);
+    fill: #3d433b;
+  }
+
+  .chart-svg .chart-unit {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    fill: #7d8276;
+  }
+
+  .chart-svg .axis-text {
+    fill: #656c61;
+  }
+
+  .chart-svg .axis-text.mono-text {
+    font-family: var(--font-mono);
+    letter-spacing: 0.015em;
+    fill: #7d8276;
+  }
+
+  .chart-svg .axis-line {
+    stroke: #5b6359;
+    stroke-width: 1;
+    stroke-linecap: round;
+  }
+
+  .chart-svg .grid-line {
+    stroke: #bdc7c0;
+    stroke-width: 0.8;
+    stroke-dasharray: 2 5;
+    opacity: 0.85;
+  }
+
+  .chart-svg .rough {
+    filter: url("#roughen");
+  }
+
+  .chart-svg .bar-mark,
+  .chart-svg .dot,
+  .chart-svg .slice,
+  .chart-svg .trend-line {
+    transition: opacity 0.16s ease;
+  }
+
+  .chart-svg .bar-mark:hover,
+  .chart-svg .slice:hover {
+    opacity: 0.82;
+  }
+}
+
+@media (max-width: 1120px) {
+  .notebook {
+    --page-left: 94px;
+    --page-right: 46px;
+    --margin-x: 58px;
+  }
+}
+
+@media (max-width: 920px) {
+  .desk-pad {
+    padding: 18px 16px 40px;
+  }
+
+  .notebook {
+    min-height: calc(100svh - 58px);
+    --page-left: 78px;
+    --page-right: 32px;
+    --margin-x: 52px;
+  }
+}
+
+@media (max-width: 620px) {
+  .desk-pad {
+    padding: 0;
+  }
+
+  .notebook {
+    min-height: 100svh;
+    --page-left: 48px;
+    --page-right: 18px;
+    --margin-x: 30px;
+
+    width: 100%;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  .desk-pad {
+    padding: 0;
+  }
+
+  .notebook {
+    box-shadow: none;
+    background: white;
+  }
+}

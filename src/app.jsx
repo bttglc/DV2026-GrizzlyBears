@@ -1,9 +1,10 @@
 import { LocationProvider, Route, Router, useLocation } from "preact-iso";
 import { topics } from "./topics";
-import { base } from "./config";
 import { Header } from "./components/Header";
 import { Home } from "./components/Home";
 import { Footer } from "./components/Footer";
+
+const base = import.meta.env.BASE_URL;
 
 function TopicRoute({ params }) {
   const topic = topics.find((item) => item.id === params.id);

@@ -1,4 +1,4 @@
-import { base } from "../config";
+const base = import.meta.env.BASE_URL;
 
 export function Home() {
   return (

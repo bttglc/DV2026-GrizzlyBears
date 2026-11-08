@@ -1,6 +1,7 @@
 import { useLocation } from "preact-iso";
 import { topics } from "../topics";
-import { base } from "../config";
+
+const base = import.meta.env.BASE_URL;
 
 export function Header({ activeId }) {
   const { route } = useLocation();

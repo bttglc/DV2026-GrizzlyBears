@@ -15,6 +15,12 @@ Repository of Grizzly Bears (Bottiglieri Gianluca, Castellotti Roberto, Siri Edo
 + worked in software for the last 10 years, in one way or another
 + currently, I often rely on Claude by Anthropic for boilerplate code and prototyping
 
+### Edoardo
+
++ studied statistics during my Bachelor (SMID) 
++ experienced in data analysis and data management
++ little experience on web design
+
 ## Technologies we plan to use
 
 We plan to start with good old plain HTML, CSS and Javascript. Potentially we will extend, if needed, using either: 

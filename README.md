@@ -22,6 +22,12 @@ Final Assignment for the [Data Visualization](https://corsi.unige.it/en/off.f/20
 + worked in software for the last 10 years, in one way or another
 + currently, I often rely on Claude by Anthropic for boilerplate code and prototyping
 
+### Edoardo
+
++ studied statistics during my Bachelor (SMID) 
++ experienced in data analysis and data management
++ little experience on web design
+
 ## Technologies we plan to use
 
 We plan to use [Preact](https://preactjs.com/), a micro react framework with API compatibility) with [Tailwind CSS](https://tailwindcss.com/), an atomic CSS framework with [D3.js](https://d3js.org/) for visualizations.
